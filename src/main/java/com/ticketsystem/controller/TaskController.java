@@ -18,12 +18,23 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 	
+	
 	@PostMapping("/{taskId}/assigned-developer")
 	public ResponseEntity<?> assignTaskToDeveloper(@PathVariable Long taskId, @RequestParam Long developerId ) {
 		try {
 			taskService.assignTaskToDeveloper(taskId,developerId);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("{taskId}/note")
+	public ResponseEntity<?> createNote(@PathVariable Long taskId) {
+		try {
+			
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

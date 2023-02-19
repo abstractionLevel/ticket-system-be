@@ -16,7 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
 	@Modifying
 	@Transactional
-	@Query(value="INSER INTO (nome, cognome, id_role) VALUES (nome,cognome,roleId")
-	void save(@Param("nome") String nome, @Param("cognome") String cognome, @Param("roleId") Long roleId);
+	@Query(value="INSERT INTO employee (id,nome, cognome, id_role) VALUES (10,:nome,:cognome,:roleId)",nativeQuery = true)
+	void create(@Param("nome") String nome, @Param("cognome") String cognome, @Param("roleId") Long roleId);
 
 }

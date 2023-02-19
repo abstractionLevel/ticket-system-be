@@ -15,13 +15,13 @@ import jakarta.persistence.Table;
 public class Role {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(name = "name")
     private String name;
     
-    @OneToMany(mappedBy = "role")//un ruolo puo essere associato a molti impiegati
+    @OneToMany(mappedBy = "role")
     private List<Employee> impiegati;
     
     public Role() {

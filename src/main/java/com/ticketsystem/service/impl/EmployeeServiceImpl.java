@@ -29,9 +29,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 		Role role =  roleService.getById(employeeDto.getRoleId());
 		if(role!=null) {
 			Employee  employee = new Employee(employeeDto.getNome(),employeeDto.getCognome(),role);
-			employeeRepository.save(employee);
+			employeeRepository.create(employee.getNome(),employee.getCognome(),employee.getRole().getId());
 		}else {
-			
 		}
 		
 	}

@@ -10,10 +10,10 @@ import com.ticketsystem.entity.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long>{
 
-	@Query(value="SELECT * FROM role")
+	@Query(value="SELECT * FROM roles",nativeQuery = true)
 	List<Role> getAllRole();
 	
-	@Query(value="SELECT * FROM role WHERE id=:id")
+	@Query(value="SELECT * FROM roles WHERE id=:id", nativeQuery = true)
 	Role getById(@Param("id") Long id);
 
 }

@@ -30,7 +30,8 @@ public class AccessRecordServiceImpl implements AccessRecordService{
 
 	@Override
 	public void saveExitRectord(Long idEmployee) {
-		// TODO Auto-generated method stub
+		Badge badge = badgeService.getBadgeByEmployeeId(idEmployee);
+		timeLogService.save(new TimeLog(LocalDateTime.now(),"EXIT",badge));
 		
 	}
 	

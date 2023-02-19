@@ -26,5 +26,15 @@ public class AccessRecordController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}	
 	}
+	
+	@PostMapping("/{idEmployee}/exit")
+	public ResponseEntity<Void> extitEntryRecord(@PathVariable Long idEmployee) {
+		try {
+			accessRecordService.saveExitRectord(idEmployee);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}	
+	}
 
 }

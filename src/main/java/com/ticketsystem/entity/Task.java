@@ -39,11 +39,13 @@ public class Task {
 	@JoinColumn(name="id_pm")
 	private Employee pm;
 	
-	@ManyToMany(mappedBy = "tasks")
-	private List<Employee> employees;
+//	@ManyToMany(mappedBy = "tasks")
+//	private List<Employee> employees;
 	
 	@OneToMany(mappedBy="task")
 	private List<Note> notes;
+	
+	public Task() {}
 
 	public Long getId() {
 		return id;
@@ -85,13 +87,7 @@ public class Task {
 		this.project = project;
 	}
 
-//	public Employee getPm() {
-//		return pm;
-//	}
-//
-//	public void setPm(Employee pm) {
-//		this.pm = pm;
-//	}
+	
 
 //	public List<Employee> getDev() {
 //		return dev;
@@ -109,13 +105,13 @@ public class Task {
 		this.notes = notes;
 	}
 
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
+//	public List<Employee> getEmployees() {
+//		return employees;
+//	}
+//
+//	public void setEmployees(List<Employee> employees) {
+//		this.employees = employees;
+//	}
 
 	public Employee getPm() {
 		return pm;

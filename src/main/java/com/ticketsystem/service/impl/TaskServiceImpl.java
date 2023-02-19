@@ -1,6 +1,7 @@
 package com.ticketsystem.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,11 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public List<Task> getAllTaskByProjectId(Long projectId) {
-		return taskRepository.findAllTaskByProjectId(projectId);
+	public List<TaskDto> getAllTaskByProjectId(Long projectId) {
+		List<Task> tasks = taskRepository.findAllTaskByProjectId(projectId);
+		List<TaskDto> taskDTOs = tasks.stream()
+                .map(task -> new TaskDto( task.getDescrizione(),task.getDeadline(),task.getStatus(),task.getPm().getId())).collect(Collectors.toList());
+		return  taskDTOs;
 	}
 
 }

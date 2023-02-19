@@ -1,6 +1,7 @@
 package com.ticketsystem.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,10 +55,10 @@ public class ProjectController {
 	}
 	
 	@GetMapping("{projectId}/tasks")
-	public ResponseEntity<List<Task>> getTasks(@PathVariable Long projectId) {
+	public ResponseEntity<List<TaskDto>> getTasks(@PathVariable Long projectId) {
 		try {
-			List<Task> tasks = taskService.getAllTaskByProjectId(projectId);
-			return new ResponseEntity<>(HttpStatus.OK);
+			List<TaskDto> tasksdDtos = taskService.getAllTaskByProjectId(projectId);
+			return  new ResponseEntity<>(tasksdDtos,HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		
 		}

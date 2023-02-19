@@ -46,8 +46,5 @@ public class TaskAssignment {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-	 
-	 
-
+	} 
 }

@@ -19,8 +19,9 @@ public class TaskController {
 	private TaskService taskService;
 	
 	@PostMapping("/{id}/assigned-developer")
-	public ResponseEntity<?> assignTaskToDeveloper(@PathVariable Long id, @RequestParam Long devId ) {
+	public ResponseEntity<?> assignTaskToDeveloper(@PathVariable Long taskId, @RequestParam Long devId ) {
 		try {
+			taskService.assignTaskToDeveloper(taskId,devId);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

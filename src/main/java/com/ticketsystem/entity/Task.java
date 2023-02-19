@@ -39,6 +39,8 @@ public class Task {
 	@JoinColumn(name="id_pm")
 	private Employee pm;
 	
+	
+	
 //	@ManyToMany(mappedBy = "tasks")
 //	private List<Employee> employees;
 	

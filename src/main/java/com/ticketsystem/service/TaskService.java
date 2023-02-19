@@ -1,5 +1,8 @@
 package com.ticketsystem.service;
 
-public interface TaskService {
+import com.ticketsystem.entity.Task;
 
+public interface TaskService {
+	
+	void createTask(Long idProject, Task task);
 }

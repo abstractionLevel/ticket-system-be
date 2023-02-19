@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ticketsystem.service.NoteService;
 import com.ticketsystem.service.TaskService;
 
 @RestController
@@ -17,6 +18,8 @@ public class TaskController {
 
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private NoteService noteService;
 	
 	
 	@PostMapping("/{taskId}/assigned-developer")

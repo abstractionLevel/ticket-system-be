@@ -28,6 +28,12 @@ public class Note {
 	@JoinColumn(name="id_task")
 	private Task task;
 
+	public Note(String description, Task task, Employee dev) {
+		this.descrizione = description;
+		this.task = task;
+		this.dev = dev;
+	}
+
 	public Long getId() {
 		return id;
 	}

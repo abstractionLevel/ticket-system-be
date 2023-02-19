@@ -44,4 +44,10 @@ public class TaskServiceImpl implements TaskService {
 		return  taskDTOs;
 	}
 
+	@Override
+	public void assignTaskToDeveloper(Long taskId, Long devId) {
+//		taskRepository.assignToDev
+		
+	}
+
 }

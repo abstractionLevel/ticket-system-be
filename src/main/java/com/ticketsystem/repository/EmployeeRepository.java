@@ -8,7 +8,7 @@ import com.ticketsystem.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
-	@Query(value="SELECT * FROM employee WHERE id = :id ", nativeQuery=true )
-	Employee getById(@Param("id") Long id);
+	@Query(value="SELECT * FROM employee WHERE id = :devId ", nativeQuery=true )
+	Employee getById(@Param("devId") Long devId);
 
 }

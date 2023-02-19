@@ -13,7 +13,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long>{
 	
 	@Modifying
 	@Transactional
-	@Query(value="UPDATE project  p SET p.id_pm :idPm WHERE p.id = :projectId", nativeQuery = true)
+	@Query(value="UPDATE project p SET p.id_pm = :idPm WHERE p.id = :projectId", nativeQuery = true)
 	void assignToPm(@Param("projectId") Long projectId , @Param("idPm") Long idPm);
 
 }

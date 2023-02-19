@@ -18,7 +18,7 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 	
-	@PostMapping("/{id}/assigned-developer")
+	@PostMapping("/{taskId}/assigned-developer")
 	public ResponseEntity<?> assignTaskToDeveloper(@PathVariable Long taskId, @RequestParam Long developerId ) {
 		try {
 			taskService.assignTaskToDeveloper(taskId,developerId);

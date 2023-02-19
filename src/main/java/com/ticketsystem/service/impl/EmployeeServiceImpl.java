@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ticketsystem.entity.Employee;
+import com.ticketsystem.entity.Role;
 import com.ticketsystem.repository.EmployeeRepository;
 import com.ticketsystem.service.EmployeeService;
 
@@ -12,7 +13,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-
+	@Autowired
+	private RoleService roleService;
 	
 	@Override
 	public Employee findById(Long id) {

@@ -54,9 +54,9 @@ public class ProjectController {
 	}
 	
 	@GetMapping("{projectId}/tasks")
-	public ResponseEntity<List<Task>> getTasks() {
+	public ResponseEntity<List<Task>> getTasks(@PathVariable Long projectId) {
 		try {
-		
+			List<Task> tasks = taskService.getAllTaskByProjectId(projectId);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		

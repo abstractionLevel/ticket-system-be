@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ticketsystem.TaskDto;
 import com.ticketsystem.entity.Employee;
 import com.ticketsystem.entity.Task;
+import com.ticketsystem.repository.TaskAssignmentRepository;
 import com.ticketsystem.repository.TaskRepository;
 import com.ticketsystem.service.EmployeeService;
 import com.ticketsystem.service.TaskService;
@@ -20,6 +21,8 @@ public class TaskServiceImpl implements TaskService {
 	private TaskRepository taskRepository;
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private TaskAssignmentRepository taskAssignmentRepository;
 	
 	@Override
 	public void createTask(Long projectId, TaskDto taskDto) {	
@@ -46,8 +49,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void assignTaskToDeveloper(Long taskId, Long devId) {
-//		taskRepository.assignToDev
-		
+		taskAssignmentRepository.save(taskId,devId);
 	}
 
 }

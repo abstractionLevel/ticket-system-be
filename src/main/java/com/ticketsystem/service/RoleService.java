@@ -7,4 +7,5 @@ import com.ticketsystem.entity.Role;
 public interface RoleService {
 
 	List<Role> getList();
+	Role getById(Long id);
 }

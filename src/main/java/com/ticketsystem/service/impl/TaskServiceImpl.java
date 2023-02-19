@@ -34,9 +34,7 @@ public class TaskServiceImpl implements TaskService {
 			task.setStatus(taskDto.getStatus());
 			task.setPm(employee);
 			taskRepository.save(task.getDeadline(),task.getDescrizione(), task.getStatus(),task.getPm().getId(),projectId);
-		}
-		
-		
+		}	
 	}
 
 	@Override

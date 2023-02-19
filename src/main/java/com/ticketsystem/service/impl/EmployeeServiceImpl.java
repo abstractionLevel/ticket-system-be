@@ -12,11 +12,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+
 	
 	@Override
 	public Employee findById(Long id) {
 		return  employeeRepository.getById(id);
 
+	}
+
+	@Override
+	public void create(Employee employee) {
+		
 	}
 
 }

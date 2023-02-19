@@ -14,8 +14,8 @@ public class TaskServiceImpl implements TaskService {
 	private TaskRepository taskRepository;
 	
 	@Override
-	public void createTask(Long idProject, Task task) {
-		// TODO Auto-generated method stub
+	public void createTask(Long projectId, Task task) {		
+		taskRepository.save(task.getDeadline(),task.getDescrizione(), task.getStatus(),projectId);
 		
 	}
 

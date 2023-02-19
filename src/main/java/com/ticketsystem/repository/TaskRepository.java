@@ -15,6 +15,6 @@ public interface TaskRepository extends JpaRepository<Task, Long>{
 	
 	@Modifying
 	@Transactional
-	@Query(value = "INSERT INTO task (deadline,descrizione,status,id_project) VALUES (:deadLine,:description,:status,:projectId)",nativeQuery = true)
-	void save(@Param("deadLine") LocalDate deadLine, @Param("description") String description , @Param("status") String status, @Param("projectId") Long id );
+	@Query(value = "INSERT INTO task (deadline,descrizione,status,id_pm,id_project) VALUES (:deadLine,:description,:status,:pmId,:projectId)",nativeQuery = true)
+	void save(@Param("deadLine") LocalDate deadLine, @Param("description") String description , @Param("status") String status,@Param("pmId") Long pmId , @Param("projectId") Long projectId );
 }

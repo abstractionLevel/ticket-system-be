@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ticketsystem.TaskDto;
 import com.ticketsystem.entity.Project;
 import com.ticketsystem.entity.Task;
+import com.ticketsystem.service.EmployeeService;
 import com.ticketsystem.service.ProjectService;
 import com.ticketsystem.service.TaskService;
 
@@ -23,6 +25,8 @@ public class ProjectController {
 	private ProjectService projectService;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private EmployeeService employeeService;
 	
 	@PostMapping("/{projectId}/assign")
 	public ResponseEntity<Project> assignProject(@PathVariable Long projectId, @RequestParam Long pmId) {
@@ -35,13 +39,15 @@ public class ProjectController {
 	}
 	
 	@PostMapping("{projectId}/tasks")
-	public ResponseEntity<Task> createTaskForProject(@PathVariable Long projectId, @RequestBody Task task) {
+	public ResponseEntity<Task> createTaskForProject(@PathVariable Long projectId, @RequestBody TaskDto taskDto) {
 		try {
-			taskService.createTask(projectId, task);
+			taskService.createTask(projectId, taskDto);
 			return new ResponseEntity<>(HttpStatus.CREATED);
+			
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		
 		}
+	
 	}
 
 }

@@ -15,7 +15,6 @@ public class TimeLogServiceImpl implements TimeLogService{
 	
 	@Override
 	public void save(TimeLog timeLog) {
-		System.out.print("TIme dsa " + timeLog.getAccessTime() + " " + timeLog.getAccessType() + " " + timeLog.getBadge().getId());
 		timeLogRepository.save(timeLog.getAccessTime(), timeLog.getAccessType(),timeLog.getBadge().getId());
 	}
 

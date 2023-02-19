@@ -8,8 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -53,6 +51,12 @@ public class Employee {
 	
 	@OneToMany(mappedBy="dev")
 	private List<Note> notes;
+
+	public Employee(String nome, String cognome, Role role) {
+		this.nome=nome;
+		this.cognome=cognome;
+		this.role=role;
+	}
 
 	public Role getRole() {
 		return role;

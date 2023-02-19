@@ -1,11 +1,9 @@
 package com.ticketsystem.service.impl;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ticketsystem.dto.EmployeeDto;
 import com.ticketsystem.entity.Employee;
 import com.ticketsystem.entity.Role;
 import com.ticketsystem.repository.EmployeeRepository;
@@ -27,7 +25,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public void create(Employee employee) {
+	public void create(EmployeeDto employeeDto) {
+		Role role =  roleService.getById(employeeDto.getRoleId());
+		if(role!=null) {
+			Employee  employee = new Employee(employeeDto.getNome(),employeeDto.getCognome(),role);
+			employeeRepository.save(employee);
+		}else {
+			
+		}
 		
 	}
 

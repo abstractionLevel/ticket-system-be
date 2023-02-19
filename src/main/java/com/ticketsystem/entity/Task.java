@@ -1,6 +1,6 @@
 package com.ticketsystem.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -29,7 +29,7 @@ public class Task {
 	private String status;
 	
 	@Column(name="deadline")
-	private LocalDateTime deadline;
+	private LocalDate deadline;
 	
 	@ManyToOne
 	@JoinColumn(name="id_project")
@@ -69,11 +69,11 @@ public class Task {
 		this.status = status;
 	}
 
-	public LocalDateTime getDeadline() {
+	public LocalDate getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(LocalDateTime deadline) {
+	public void setDeadline(LocalDate deadline) {
 		this.deadline = deadline;
 	}
 

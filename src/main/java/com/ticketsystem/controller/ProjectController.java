@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ticketsystem.entity.Project;
 import com.ticketsystem.entity.Task;
 import com.ticketsystem.service.ProjectService;
+import com.ticketsystem.service.TaskService;
 
 @RestController
 @RequestMapping("api/projects")
@@ -33,9 +34,10 @@ public class ProjectController {
 		}
 	}
 	
-	@PostMapping("/tasks")
+	@PostMapping("{projectId}/tasks")
 	public ResponseEntity<Task> createTaskForProject(@PathVariable Long projectId, @RequestBody Task task) {
 		try {
+			taskService.createTask(projectId, task);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		

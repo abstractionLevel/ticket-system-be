@@ -19,6 +19,6 @@ public interface TaskRepository extends JpaRepository<Task, Long>{
 	@Query(value = "INSERT INTO task (deadline,descrizione,status,id_pm,id_project) VALUES (:deadLine,:description,:status,:pmId,:projectId)",nativeQuery = true)
 	void save(@Param("deadLine") LocalDate deadLine, @Param("description") String description , @Param("status") String status,@Param("pmId") Long pmId , @Param("projectId") Long projectId );
 
-	@Query(value="SELECT * FROM task WHERE id_project = :projectId")
+	@Query(value="SELECT * FROM task WHERE id_project = :projectId", nativeQuery = true)
 	List<Task> findAllTaskByProjectId(@Param("projectId") Long projectId);
 }

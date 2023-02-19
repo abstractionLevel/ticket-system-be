@@ -20,6 +20,8 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private TaskService taskService;
 	
 	@PostMapping("/{projectId}/assign")
 	public ResponseEntity<Project> assignProject(@PathVariable Long projectId, @RequestParam Long pmId) {
@@ -36,7 +38,7 @@ public class ProjectController {
 		try {
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		
 		}
 	}
 

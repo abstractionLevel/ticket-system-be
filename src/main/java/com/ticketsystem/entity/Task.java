@@ -35,9 +35,9 @@ public class Task {
 	@JoinColumn(name="id_project")
 	private Project project;
 	
-//	@ManyToOne
-//	@JoinColumn(name="id_pm")
-//	private Employee pm;
+	@ManyToOne
+	@JoinColumn(name="id_pm")
+	private Employee pm;
 	
 	@ManyToMany(mappedBy = "tasks")
 	private List<Employee> employees;
@@ -115,6 +115,14 @@ public class Task {
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
+	}
+
+	public Employee getPm() {
+		return pm;
+	}
+
+	public void setPm(Employee pm) {
+		this.pm = pm;
 	}
 	
 	

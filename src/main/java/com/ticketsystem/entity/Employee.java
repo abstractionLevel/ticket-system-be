@@ -44,12 +44,7 @@ public class Employee {
 	private Badge badge;
 	
 	
-	@ManyToMany
-    @JoinTable(
-	    name = "employee_task",
-	    joinColumns = {@JoinColumn(name = "id_employee")},
-	    inverseJoinColumns = {@JoinColumn(name = "id_task")}
-    )
+	@OneToMany(mappedBy = "pm")
     private List<Task> tasks;
 	
 	@ManyToOne()

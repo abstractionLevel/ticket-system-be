@@ -47,7 +47,12 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void assignTaskToDeveloper(Long taskId, Long devId) {
-		taskAssignmentRepository.save(taskId,devId);
+		Task task  = taskRepository.getById(taskId);
+		Employee employee = employeeService.findById(devId);
+		if(task!=null && employee!=null) {
+			taskAssignmentRepository.save(task.getId(),employee.getId());
+		}
+		
 	}
 
 }

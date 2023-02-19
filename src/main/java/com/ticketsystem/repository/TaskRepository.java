@@ -23,5 +23,5 @@ public interface TaskRepository extends JpaRepository<Task, Long>{
 	List<Task> findAllTaskByProjectId(@Param("projectId") Long projectId);
 	
 	@Query(value="SELECT * FROM task WHERE id=:taskId",nativeQuery = true) 
-	Task findByid(@Param("taskId") Long taskId);
+	Task getById(@Param("taskId") Long taskId);
 }

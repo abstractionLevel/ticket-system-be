@@ -2,17 +2,21 @@ package com.ticketsystem.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ticketsystem.repository.EmployeeRepository;
+import com.ticketsystem.entity.Employee;
+import com.ticketsystem.service.EmployeeService;
 import com.ticketsystem.service.ProjectService;
 
 public class ProjectServiceImpl  implements ProjectService {
 	
 	@Autowired
-	private EmployeeRepository employeeRepository;
+	private EmployeeService employeeService;
 
 	@Override
 	public void assignProjectToPm(Long projectId, Long pmId) {
-		// TODO Auto-generated method stub
+		Employee employee = employeeService.findById(pmId);
+		if(employee!=null) {
+			System.out.print("Employee " + employee);
+		}
 		
 	}
 

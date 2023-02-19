@@ -8,7 +8,7 @@ import com.ticketsystem.entity.Project;
 
 public interface ProjectRepository extends JpaRepository<Project, Long>{
 	
-	@Query(value="UPDATE project  p SET p.id_pm :idPm WHERE p.id = :idProject", nativeQuery = true)
-	void assignToPm(@Param("idProject") Long idProject , @Param("idPm") Long idPm);
+	@Query(value="UPDATE project  p SET p.id_pm :idPm WHERE p.id = :projectId", nativeQuery = true)
+	void assignToPm(@Param("projectId") Long projectId , @Param("idPm") Long idPm);
 
 }

@@ -13,14 +13,14 @@ import com.ticketsystem.entity.Project;
 import com.ticketsystem.service.ProjectService;
 
 @RestController
-@RequestMapping("api/project")
+@RequestMapping("api/projects")
 public class ProjectController {
 	
 	@Autowired
 	private ProjectService projectService;
 	
-	@PostMapping("/pm/{pmId}/assign-project")
-	public ResponseEntity<Project> assignProject(@PathVariable Long pmId, @RequestParam Long projectId) {
+	@PostMapping("/{projectId}/assign")
+	public ResponseEntity<Project> assignProject(@PathVariable Long projectId, @RequestParam Long pmId) {
 		try {
 			projectService.assignProjectToPm(projectId, pmId);
 			return new ResponseEntity<>(HttpStatus.CREATED);

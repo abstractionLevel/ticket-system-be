@@ -11,9 +11,8 @@ public class TaskDto {
 	private Long pmId;
 	private String status;
 	
-	public TaskDto( String descrizione) {
-		this.descrizione = descrizione;
-	}
+	public TaskDto() {}
+	
 	public TaskDto(String descrizione, LocalDate deadline, String status,  Long pmId) {
 		this.descrizione = descrizione;
 		this.deadline = deadline;

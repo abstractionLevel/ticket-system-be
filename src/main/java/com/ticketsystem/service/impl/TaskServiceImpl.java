@@ -33,8 +33,13 @@ public class TaskServiceImpl implements TaskService {
 			task.setDescrizione(taskDto.getDescrizione());
 			task.setStatus(taskDto.getStatus());
 			task.setPm(employee);
-			taskRepository.save(task.getDeadline(),task.getDescrizione(), task.getStatus(),task.getPm().getId(),projectId);
-		}	
+			System.out.println("ogeetoo creato con " + employee);
+			Task taskSaved = taskRepository.save(task.getDeadline(),task.getDescrizione(), task.getStatus(),task.getPm().getId(),projectId);
+			Long id = taskSaved.getId();
+			System.out.println("il taskasdfs " + id);
+		}else {
+			System.out.println("problema con " + employee);
+		}
 	}
 
 	@Override

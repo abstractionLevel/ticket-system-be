@@ -40,4 +40,14 @@ public class ProjectServiceImpl  implements ProjectService {
 		 
 	}
 
+	@Override
+	public void createProject(ProjectDto projectDto) {
+		Employee employee = employeeService.findById(projectDto.getPmdId());
+		Project project = new Project();
+		project.setName(project.getName());
+		project.setPm(employee);
+		projectRepository.save(project);
+		
+	}
+
 }

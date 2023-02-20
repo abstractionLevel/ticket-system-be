@@ -28,6 +28,7 @@ public class Note {
 	@JoinColumn(name="id_task")
 	private Task task;
 
+	public Note() {}
 	public Note(String description, Task task, Employee dev) {
 		this.descrizione = description;
 		this.task = task;

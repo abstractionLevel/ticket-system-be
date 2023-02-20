@@ -32,6 +32,16 @@ public class ProjectController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@PostMapping
+	public ResponseEntity<Project> createProject(@RequestBody ProjectDto projectDto) {
+		try {
+			projectService.createProject(projectDto);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PostMapping("/{projectId}/assign")
 	public ResponseEntity<Project> assignProject(@PathVariable Long projectId, @RequestParam Long pmId) {
 		try {
@@ -54,6 +64,7 @@ public class ProjectController {
 	
 	@PostMapping("{projectId}/tasks")
 	public ResponseEntity<Task> createTaskForProject(@PathVariable Long projectId, @RequestBody TaskDto taskDto) {
+		System.out.print("spnp ");
 		try {
 			taskService.createTask(projectId, taskDto);
 			return new ResponseEntity<>(HttpStatus.CREATED);

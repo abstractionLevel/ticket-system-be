@@ -10,4 +10,6 @@ public interface ProjectService {
 
 	List<ProjectDto> getAllProject();
 
+	void createProject(ProjectDto projectDto);
+
 }

@@ -11,8 +11,8 @@ import jakarta.transaction.Transactional;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
-	@Query(value="SELECT * FROM employee WHERE id = :devId ", nativeQuery=true )
-	Employee getById(@Param("devId") Long devId);
+	@Query(value="SELECT * FROM employee WHERE id = :id ", nativeQuery=true )
+	Employee getEmployeeById(@Param("id") Long id);
 	
 	@Modifying
 	@Transactional

@@ -29,7 +29,8 @@ public class TimeLog {
     @JoinColumn(name = "id_badge")
     private Badge badge;
 	
-	
+	public TimeLog() {}
+	 
 
 	public TimeLog(LocalDateTime accessTime, String accessType, Badge badge) {
 		super();

@@ -41,9 +41,8 @@ public class TaskServiceImpl implements TaskService {
 			task.setPm(employee);
 			task.setProject(project);
 			taskRepository.save(task);
-			taskRepository.flush();
-			TaskAssignment taskAssignment = new TaskAssignment(employee,task);
-			taskAssignmentRepository.save(taskAssignment);
+//			TaskAssignment taskAssignment = new TaskAssignment(employee,task);
+//			taskAssignmentRepository.save(taskAssignment);
 		}else {
 			System.out.println("problema con " + employee);
 		}

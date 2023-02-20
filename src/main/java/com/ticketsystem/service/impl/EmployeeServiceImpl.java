@@ -1,5 +1,8 @@
 package com.ticketsystem.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employee;
 
 	}
-
+	
 	@Override
 	public void create(EmployeeDto employeeDto) {
 		Role role =  roleService.getById(employeeDto.getRoleId());
@@ -34,6 +37,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}else {
 		}
 		
+	}
+
+	@Override
+	public List<EmployeeDto> getEmployees() {
+		List<Employee> employees = employeeRepository.findAll();
+		return employees.stream().map(employee ->
+			new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId())).collect(Collectors.toList());
 	}
 
 }

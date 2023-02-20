@@ -21,4 +21,9 @@ public interface ProjectRepository extends JpaRepository<Project, Long>{
 	@Query(value="SELECT * FROM project",  nativeQuery = true)
 	List<Project> getAll();
 
+	@Modifying
+	@Transactional
+	@Query(value="INSERT INTO project (name, id_pm) VALUES (:name,:pmId) ", nativeQuery = true)
+	void saveProject(@Param("name") String name , @Param("pmId") Long pmId);
+
 }

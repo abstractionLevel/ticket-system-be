@@ -42,11 +42,9 @@ public class ProjectServiceImpl  implements ProjectService {
 
 	@Override
 	public void createProject(ProjectDto projectDto) {
+		System.out.println(projectDto.getName() + "" + projectDto.getPmdId());
 		Employee employee = employeeService.findById(projectDto.getPmdId());
-		Project project = new Project();
-		project.setName(project.getName());
-		project.setPm(employee);
-		projectRepository.save(project);
+		projectRepository.saveProject(projectDto.getName(), employee.getId());
 		
 	}
 

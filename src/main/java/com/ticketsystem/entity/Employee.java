@@ -52,6 +52,8 @@ public class Employee {
 	@OneToMany(mappedBy="dev")
 	private List<Note> notes;
 
+	public Employee() {}
+	
 	public Employee(String nome, String cognome, Role role) {
 		this.nome=nome;
 		this.cognome=cognome;

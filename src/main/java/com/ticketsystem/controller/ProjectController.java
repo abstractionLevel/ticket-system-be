@@ -42,6 +42,15 @@ public class ProjectController {
 		}
 	}
 	
+	@GetMapping
+	public ResponseEntity<List<Project>> getProject() {
+		try {
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PostMapping("{projectId}/tasks")
 	public ResponseEntity<Task> createTaskForProject(@PathVariable Long projectId, @RequestBody TaskDto taskDto) {
 		try {

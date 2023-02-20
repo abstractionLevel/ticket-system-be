@@ -1,7 +1,6 @@
 package com.ticketsystem.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ticketsystem.TaskDto;
+import com.ticketsystem.dto.ProjectDto;
 import com.ticketsystem.entity.Project;
 import com.ticketsystem.entity.Task;
 import com.ticketsystem.service.EmployeeService;
@@ -43,9 +43,10 @@ public class ProjectController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Project>> getProject() {
+	public ResponseEntity<List<ProjectDto>> getProject() {
 		try {
-			return new ResponseEntity<>(HttpStatus.CREATED);
+			List<ProjectDto> projectDtos = projectService.getAllProject();
+			return new ResponseEntity<>(projectDtos, HttpStatus.CREATED);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

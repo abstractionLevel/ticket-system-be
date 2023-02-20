@@ -10,6 +10,7 @@ import com.ticketsystem.TaskDto;
 import com.ticketsystem.entity.Employee;
 import com.ticketsystem.entity.Project;
 import com.ticketsystem.entity.Task;
+import com.ticketsystem.entity.TaskAssignment;
 import com.ticketsystem.repository.TaskAssignmentRepository;
 import com.ticketsystem.repository.TaskRepository;
 import com.ticketsystem.service.EmployeeService;
@@ -43,6 +44,8 @@ public class TaskServiceImpl implements TaskService {
 			taskRepository.save(task);
 			taskRepository.flush();
 			System.out.println("il task " + task.getId());
+			TaskAssignment taskAssignment = new TaskAssignment(employee,task);
+			taskAssignmentRepository.save(taskAssignment);
 		}else {
 			System.out.println("problema con " + employee);
 		}

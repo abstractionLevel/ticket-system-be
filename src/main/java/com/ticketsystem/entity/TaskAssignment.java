@@ -12,17 +12,26 @@ import jakarta.persistence.Table;
 @Table(name="task_assignment")
 public class TaskAssignment {
 	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	 
-	 @ManyToOne
-	 @JoinColumn(name = "task_id")
-	 private Task task;
+	@ManyToOne
+	@JoinColumn(name = "task_id")
+	private Task task;
 	 
-	 @ManyToOne
-	 @JoinColumn(name = "developer_id")
-	 private Employee employee;
+	@ManyToOne
+	@JoinColumn(name = "developer_id")
+	private Employee employee;
+	 
+	public TaskAssignment() {
+	}
+
+
+	public TaskAssignment(Employee employee, Task task) {
+		this.employee = employee;
+		this.task = task;
+	}
 
 	public Long getId() {
 		return id;

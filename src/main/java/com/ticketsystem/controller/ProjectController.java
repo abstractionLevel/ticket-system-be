@@ -64,7 +64,6 @@ public class ProjectController {
 	
 	@PostMapping("{projectId}/tasks")
 	public ResponseEntity<Task> createTaskForProject(@PathVariable Long projectId, @RequestBody TaskDto taskDto) {
-		System.out.print("spnp ");
 		try {
 			taskService.createTask(projectId, taskDto);
 			return new ResponseEntity<>(HttpStatus.CREATED);

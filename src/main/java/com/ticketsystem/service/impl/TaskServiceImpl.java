@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.ticketsystem.TaskDto;
 import com.ticketsystem.entity.Employee;
+import com.ticketsystem.entity.Project;
 import com.ticketsystem.entity.Task;
 import com.ticketsystem.repository.TaskAssignmentRepository;
 import com.ticketsystem.repository.TaskRepository;
 import com.ticketsystem.service.EmployeeService;
+import com.ticketsystem.service.ProjectService;
 import com.ticketsystem.service.TaskService;
 
 @Service
@@ -23,20 +25,24 @@ public class TaskServiceImpl implements TaskService {
 	private EmployeeService employeeService;
 	@Autowired
 	private TaskAssignmentRepository taskAssignmentRepository;
+	@Autowired
+	private ProjectService projectService;
 	
 	@Override
 	public void createTask(Long projectId, TaskDto taskDto) {	
 		Employee employee = employeeService.findById(taskDto.getPmId());
-		if(employee!=null) {
+		Project project = projectService.finById(projectId);
+		if(employee!=null && project!=null) {
 			Task task =  new Task();
 			task.setDeadline(taskDto.getDeadline());
 			task.setDescrizione(taskDto.getDescrizione());
 			task.setStatus(taskDto.getStatus());
 			task.setPm(employee);
-			System.out.println("ogeetoo creato con " + employee);
-			Task taskSaved = taskRepository.save(task.getDeadline(),task.getDescrizione(), task.getStatus(),task.getPm().getId(),projectId);
-			Long id = taskSaved.getId();
-			System.out.println("il taskasdfs " + id);
+			task.setProject(project);
+			System.out.println("employee " + employee.getNome() + " project id " + projectId);
+			taskRepository.save(task);
+			taskRepository.flush();
+			System.out.println("il task " + task.getId());
 		}else {
 			System.out.println("problema con " + employee);
 		}

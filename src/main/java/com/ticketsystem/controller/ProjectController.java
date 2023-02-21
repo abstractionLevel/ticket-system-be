@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ticketsystem.TaskDto;
+import com.ticketsystem.dto.ProjectAssignmentDto;
 import com.ticketsystem.dto.ProjectDto;
 import com.ticketsystem.entity.Project;
 import com.ticketsystem.entity.Task;
@@ -77,13 +78,23 @@ public class ProjectController {
 	
 	}
 	
-	@GetMapping("{projectId}/tasks")
+	@GetMapping("/{projectId}/tasks")
 	public ResponseEntity<List<TaskDto>> getTasks(@PathVariable Long projectId) {
 		try {
 			List<TaskDto> tasksdDtos = taskService.getAllTaskByProjectId(projectId);
 			return  new ResponseEntity<>(tasksdDtos,HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		
+		}
+	}
+	
+	@GetMapping("/{projectId}/teams")
+	public ResponseEntity<List<ProjectAssignmentDto>> hasDifferentTeams(@PathVariable Long projectId) {
+		try {
+			List<ProjectAssignmentDto> dtos = projectService.getAssignmentProjects(projectId);
+			return  new ResponseEntity<>(dtos,HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

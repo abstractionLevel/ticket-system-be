@@ -2,6 +2,7 @@ package com.ticketsystem.service;
 
 import java.util.List;
 
+import com.ticketsystem.dto.ProjectAssignmentDto;
 import com.ticketsystem.dto.ProjectDto;
 import com.ticketsystem.entity.Project;
 
@@ -14,5 +15,7 @@ public interface ProjectService {
 	void createProject(ProjectDto projectDto);
 
 	Project finById(Long projectId);
+
+	List<ProjectAssignmentDto> getAssignmentProjects(Long projectId);
 
 }

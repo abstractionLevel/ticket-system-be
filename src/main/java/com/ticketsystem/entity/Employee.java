@@ -54,10 +54,11 @@ public class Employee {
 
 	public Employee() {}
 	
-	public Employee(String nome, String cognome, Role role) {
+	public Employee(String nome, String cognome, Role role,Team team) {
 		this.nome=nome;
 		this.cognome=cognome;
 		this.role=role;
+		this.team = team;
 	}
 
 	public Role getRole() {

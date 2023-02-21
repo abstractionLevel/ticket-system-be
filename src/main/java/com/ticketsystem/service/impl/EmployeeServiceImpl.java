@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.ticketsystem.dto.EmployeeDto;
 import com.ticketsystem.entity.Employee;
 import com.ticketsystem.entity.Role;
+import com.ticketsystem.entity.Team;
 import com.ticketsystem.repository.EmployeeRepository;
 import com.ticketsystem.service.EmployeeService;
 import com.ticketsystem.service.RoleService;
+import com.ticketsystem.service.TeamService;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -20,7 +22,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	private EmployeeRepository employeeRepository;
 	@Autowired
 	private RoleService roleService;
-	
+	@Autowired
+	private TeamService teamService;
 	@Override
 	public Employee findById(Long id) {
 		Employee employee =  employeeRepository.getEmployeeById(id);
@@ -31,9 +34,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public void create(EmployeeDto employeeDto) {
 		Role role =  roleService.getById(employeeDto.getRoleId());
-		if(role!=null) {
-			Employee  employee = new Employee(employeeDto.getNome(),employeeDto.getCognome(),role);
-			employeeRepository.create(employee.getNome(),employee.getCognome(),employee.getRole().getId());
+		Team team =  teamService.getById(employeeDto.getTeamId());
+		
+		if(role!=null && team!=null) {
+			Employee  employee = new Employee(employeeDto.getNome(),employeeDto.getCognome(),role,team);
+			employeeRepository.create(employee.getNome(),employee.getCognome(),employee.getRole().getId(), employee.getTeam().getId());
 		}else {
 		}
 		

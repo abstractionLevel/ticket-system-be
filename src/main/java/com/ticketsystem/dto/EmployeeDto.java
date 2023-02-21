@@ -6,6 +6,18 @@ public class EmployeeDto {
 	private String cognome;
 	private Long roleId;
 	private Long id;
+	private Long teamId;
+	
+	public EmployeeDto() {}
+	
+	public EmployeeDto(String nome, String cognome, Long roleId, Long id,Long teamId) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.roleId = roleId;
+		this.id = id;
+		this.teamId = teamId;
+	}
 	
 	public EmployeeDto(String nome, String cognome, Long roleId, Long id) {
 		super();
@@ -38,6 +50,14 @@ public class EmployeeDto {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(Long teamId) {
+		this.teamId = teamId;
 	}
 
 }

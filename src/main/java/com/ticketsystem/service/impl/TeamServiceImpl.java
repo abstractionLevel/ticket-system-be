@@ -23,4 +23,9 @@ public class TeamServiceImpl implements TeamService {
 		return teams.stream().map(team-> new TeamDto(team.getId(),team.getNome())).collect(Collectors.toList());
 	}
 
+	@Override
+	public Team getById(Long teamId) {
+		return teamRepository.getById(teamId);
+	}
+
 }

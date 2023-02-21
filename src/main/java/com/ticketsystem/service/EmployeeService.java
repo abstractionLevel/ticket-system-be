@@ -12,4 +12,10 @@ public interface EmployeeService {
 	void create(EmployeeDto employeeDto);
 	
 	List<EmployeeDto> getEmployees();
+
+	List<EmployeeDto> getPms();
+
+	List<EmployeeDto> getDevs();
+
+	EmployeeDto getById(Long id);
 }

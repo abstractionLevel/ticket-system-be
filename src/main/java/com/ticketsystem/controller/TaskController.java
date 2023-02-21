@@ -1,21 +1,30 @@
 package com.ticketsystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ticketsystem.TaskDto;
 import com.ticketsystem.dto.NoteDto;
+import com.ticketsystem.dto.TaskAssignmentDto;
 import com.ticketsystem.service.NoteService;
 import com.ticketsystem.service.TaskService;
 
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("api/tasks")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class TaskController {
 
 	@Autowired
@@ -23,6 +32,36 @@ public class TaskController {
 	@Autowired
 	private NoteService noteService;
 	
+
+	@GetMapping("{status}")
+	public ResponseEntity<List<TaskDto>> getTasksByStatus(@PathVariable String status ) {
+		try {
+			List<TaskDto> taskDtos = taskService.getTasksByStatus(status);
+			return new ResponseEntity<>(taskDtos,HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("{taskId}/assigned-developer")
+	public ResponseEntity<List<TaskAssignmentDto>> getAssigneTasks(@PathVariable Long taskId ) {
+		try {
+			List<TaskAssignmentDto> taskDtos = taskService.getAssignedTasks(taskId);
+			return new ResponseEntity<>(taskDtos,HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@DeleteMapping("{taskId}/assigned-developer/{id}")
+	public ResponseEntity<?> deleteAssignedTask(@PathVariable Long taskId  , @PathVariable Long id) {
+		try {
+			taskService.deleteAssignedTask(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 	@PostMapping("/{taskId}/assigned-developer")
 	public ResponseEntity<?> assignTaskToDeveloper(@PathVariable Long taskId, @RequestParam Long developerId ) {
@@ -34,6 +73,8 @@ public class TaskController {
 		}
 	}
 	
+
+	
 	@PostMapping("{taskId}/note")
 	public ResponseEntity<?> createNote(@PathVariable Long taskId,@RequestBody NoteDto noteDto) {
 		try {
@@ -43,5 +84,7 @@ public class TaskController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	
 	
 }

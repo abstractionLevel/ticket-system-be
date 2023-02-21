@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ticketsystem.TaskDto;
+import com.ticketsystem.dto.TaskAssignmentDto;
 import com.ticketsystem.entity.Employee;
 import com.ticketsystem.entity.Project;
 import com.ticketsystem.entity.Task;
@@ -41,8 +42,6 @@ public class TaskServiceImpl implements TaskService {
 			task.setPm(employee);
 			task.setProject(project);
 			taskRepository.save(task);
-//			TaskAssignment taskAssignment = new TaskAssignment(employee,task);
-//			taskAssignmentRepository.save(taskAssignment);
 		}else {
 			System.out.println("problema con " + employee);
 		}
@@ -52,7 +51,7 @@ public class TaskServiceImpl implements TaskService {
 	public List<TaskDto> getAllTaskByProjectId(Long projectId) {
 		List<Task> tasks = taskRepository.findAllTaskByProjectId(projectId);
 		List<TaskDto> taskDTOs = tasks.stream()
-                .map(task -> new TaskDto( task.getDescrizione(),task.getDeadline(),task.getStatus(),task.getPm().getId())).collect(Collectors.toList());
+                .map(task -> new TaskDto(task.getId(), task.getDescrizione(),task.getDeadline(),task.getStatus(),task.getPm().getId())).collect(Collectors.toList());
 		return  taskDTOs;
 	}
 
@@ -69,6 +68,28 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Task getById(Long id) {
 		return taskRepository.getById(id);
+	}
+
+	@Override
+	public List<TaskAssignmentDto> getAssignedTasks(Long taskId) {
+		System.out.print("taskt id " + taskId);
+		List<TaskAssignment> taskAssignments = taskAssignmentRepository.getAllAssignmentTasks(taskId);
+		return taskAssignments.stream()
+				.map(task -> new TaskAssignmentDto(task.getId(), task.getEmployee().getId(), task.getTask().getId())).collect(Collectors.toList());
+	}
+
+	@Override
+	public void deleteAssignedTask(Long id) {
+		TaskAssignment taskAssignment = taskAssignmentRepository.getById(id);
+		taskAssignmentRepository.delete(taskAssignment);
+		
+	}
+
+	@Override
+	public List<TaskDto> getTasksByStatus(String status) {
+		List<Task> tasks = taskRepository.findAllTasksByStatus(status);
+		return tasks.stream()
+                .map(task -> new TaskDto(task.getId(), task.getDescrizione(),task.getDeadline(),task.getStatus(),task.getPm().getId())).collect(Collectors.toList());
 	}
 
 }

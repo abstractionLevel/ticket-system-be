@@ -6,6 +6,7 @@ import com.ticketsystem.entity.Employee;
 
 public class TaskDto {
 
+	private Long id;
 	private String descrizione;
 	private LocalDate deadline;
 	private Long pmId;
@@ -13,11 +14,12 @@ public class TaskDto {
 	
 	public TaskDto() {}
 	
-	public TaskDto(String descrizione, LocalDate deadline, String status,  Long pmId) {
+	public TaskDto(Long id, String descrizione, LocalDate deadline, String status,  Long pmId) {
 		this.descrizione = descrizione;
 		this.deadline = deadline;
 		this.status = status;
 		this.pmId = pmId;
+		this.id = id;
 	}
 	public String getDescrizione() {
 		return descrizione;
@@ -43,7 +45,14 @@ public class TaskDto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }
 

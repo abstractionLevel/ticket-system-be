@@ -46,4 +46,24 @@ public class EmployeeServiceImpl implements EmployeeService{
 			new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId())).collect(Collectors.toList());
 	}
 
+	@Override
+	public List<EmployeeDto> getPms() {
+		List<Employee> employees = employeeRepository.findAllByRolePm();
+		return employees.stream().map(employee ->
+			new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId())).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<EmployeeDto> getDevs() {
+		List<Employee> employees = employeeRepository.findAllByRoleDevs();
+		return employees.stream().map(employee ->
+			new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId())).collect(Collectors.toList());
+	}
+
+	@Override
+	public EmployeeDto getById(Long id) {
+		Employee employee = employeeRepository.getById(id);
+		return new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId());
+	}
+
 }

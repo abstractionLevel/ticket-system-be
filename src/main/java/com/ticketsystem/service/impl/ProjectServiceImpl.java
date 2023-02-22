@@ -66,4 +66,11 @@ public class ProjectServiceImpl  implements ProjectService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public void saveProjectAssignment(ProjectAssignment projectAssignment) {
+		projectAssignmentRepository.save(projectAssignment);
+		
+	}
+	
+
 }

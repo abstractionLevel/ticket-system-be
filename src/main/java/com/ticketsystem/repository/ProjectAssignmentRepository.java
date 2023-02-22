@@ -16,6 +16,12 @@ public interface ProjectAssignmentRepository extends JpaRepository<ProjectAssign
 	@Transactional
 	@Modifying
 	@Query(value = "SELECT * FROM project_assignment WHERE project_id = :projecId", nativeQuery = true)
-	List<ProjectAssignment> getAssignmentProjects(@Param("projecId") Long projecId); 
+	List<ProjectAssignment> getAssignmentProjects(@Param("projecId") Long projecId);
+
+	
+	@Modifying
+	@Transactional
+	@Query(value="DELETE FROM project_assignment   WHERE employee_id = :devId AND  project_id =:projecId", nativeQuery = true)
+	void deleteByDevIdAndProjectId(@Param("devId") Long devId, @Param("projecId") Long projectId); 
 
 }

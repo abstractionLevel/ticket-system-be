@@ -5,6 +5,7 @@ import java.util.List;
 import com.ticketsystem.dto.ProjectAssignmentDto;
 import com.ticketsystem.dto.ProjectDto;
 import com.ticketsystem.entity.Project;
+import com.ticketsystem.entity.ProjectAssignment;
 
 public interface ProjectService {
 	
@@ -17,5 +18,7 @@ public interface ProjectService {
 	Project finById(Long projectId);
 
 	List<ProjectAssignmentDto> getAssignmentProjects(Long projectId);
+	
+	void saveProjectAssignment(ProjectAssignment projectAssignment);
 
 }

@@ -20,5 +20,5 @@ public interface TaskService {
 
 	void deleteAssignedTask(Long taskId);
 
-	List<TaskDto> getTasksByStatus(String status);
+	List<TaskDto> getTasksByStatus(String status, Long id);
 }

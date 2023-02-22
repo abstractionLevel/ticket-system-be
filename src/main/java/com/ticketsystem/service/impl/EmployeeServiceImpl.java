@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		if(role!=null && team!=null) {
 			Employee  employee = new Employee(employeeDto.getNome(),employeeDto.getCognome(),role,team);
-			employeeRepository.create(employee.getNome(),employee.getCognome(),employee.getRole().getId(), employee.getTeam().getId());
+			employeeRepository.create(employee.getNome(),employee.getCognome(),employee.getRole().getId(), employee.getTeam().getId(),employeeDto.getReferentId());
 		}else {
 		}
 		
@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public List<EmployeeDto> getEmployees() {
 		List<Employee> employees = employeeRepository.findAll();
 		return employees.stream().map(employee ->
-			new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId())).collect(Collectors.toList());
+			new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId(),(long) 1,employee.getReferent())).collect(Collectors.toList());
 	}
 
 	@Override
@@ -67,9 +67,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public EmployeeDto getById(Long id) {
-		
 		Employee employee = employeeRepository.getById(id);
-		return new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId());
+		return new EmployeeDto(employee.getNome(),employee.getCognome(),employee.getRole().getId(),employee.getId(),employee.getTeam().getNome());
 	}
 
 }

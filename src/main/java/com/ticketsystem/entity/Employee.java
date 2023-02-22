@@ -35,12 +35,14 @@ public class Employee {
 	@JoinColumn(name = "id_team")
 	private Team team;
 	
-	@OneToOne(mappedBy="pm")
-	private Project project;
+//	@OneToOne(mappedBy="pm")
+//	private Project project;
 	
 	@OneToOne(mappedBy="employee")
 	private Badge badge;
 	
+	@Column(name="referent_id")
+	private Long referent;
 	
 	@OneToMany(mappedBy = "pm")
     private List<Task> tasks;
@@ -93,13 +95,13 @@ public class Employee {
 		this.team = team;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
+//	public Project getProject() {
+//		return project;
+//	}
+//
+//	public void setProject(Project project) {
+//		this.project = project;
+//	}
 
 	public Badge getBadge() {
 		return badge;
@@ -140,6 +142,13 @@ public class Employee {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	
+
+	public Long getReferent() {
+		return referent;
+	}
+
+	public void setReferent(Long referent) {
+		this.referent = referent;
+	}
 
 }

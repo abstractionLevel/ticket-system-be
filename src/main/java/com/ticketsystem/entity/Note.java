@@ -51,13 +51,13 @@ public class Note {
 		this.descrizione = descrizione;
 	}
 
-//	public Employee getDev() {
-//		return dev;
-//	}
-//
-//	public void setDev(Employee dev) {
-//		this.dev = dev;
-//	}
+	public Employee getDev() {
+		return dev;
+	}
+
+	public void setDev(Employee dev) {
+		this.dev = dev;
+	}
 
 	public Task getTask() {
 		return task;

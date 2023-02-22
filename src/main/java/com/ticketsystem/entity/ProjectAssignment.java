@@ -28,6 +28,14 @@ public class ProjectAssignment {
 	@Column(name="team_name")
 	private String teamName;
 
+	public ProjectAssignment() {}
+	
+	public ProjectAssignment( Employee employee, Project project, String teamName) {
+		super();
+		this.employee = employee;
+		this.project = project;
+		this.teamName = teamName;
+	}
 
 	public Long getId() {
 		return id;

@@ -10,6 +10,7 @@ import com.ticketsystem.TaskDto;
 import com.ticketsystem.dto.TaskAssignmentDto;
 import com.ticketsystem.entity.Employee;
 import com.ticketsystem.entity.Project;
+import com.ticketsystem.entity.ProjectAssignment;
 import com.ticketsystem.entity.Task;
 import com.ticketsystem.entity.TaskAssignment;
 import com.ticketsystem.repository.TaskAssignmentRepository;
@@ -42,6 +43,10 @@ public class TaskServiceImpl implements TaskService {
 			task.setPm(employee);
 			task.setProject(project);
 			taskRepository.save(task);
+			taskRepository.flush();
+			this.assignTaskToDeveloper(task.getId(), employee.getId());
+			ProjectAssignment projectAssignment = new ProjectAssignment(employee,project,employee.getTeam().getNome());
+			projectService.saveProjectAssignment(projectAssignment);
 		}else {
 			System.out.println("problema con " + employee);
 		}
@@ -58,9 +63,12 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public void assignTaskToDeveloper(Long taskId, Long devId) {
 		Task task  = taskRepository.getById(taskId);
+		Project project = projectService.finById(task.getProject().getId());
 		Employee employee = employeeService.findById(devId);
 		if(task!=null && employee!=null) {
 			taskAssignmentRepository.save(task.getId(),employee.getId());
+			ProjectAssignment projectAssignment = new ProjectAssignment(employee,project,employee.getTeam().getNome());
+			projectService.saveProjectAssignment(projectAssignment);
 		}
 		
 	}
@@ -80,14 +88,12 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void deleteAssignedTask(Long id) {
-		TaskAssignment taskAssignment = taskAssignmentRepository.getById(id);
-		taskAssignmentRepository.delete(taskAssignment);
-		
+		taskAssignmentRepository.deleteAssigned(id);
 	}
 
 	@Override
-	public List<TaskDto> getTasksByStatus(String status) {
-		List<Task> tasks = taskRepository.findAllTasksByStatus(status);
+	public List<TaskDto> getTasksByStatus(String status, Long id) {
+		List<Task> tasks = taskRepository.findAllTasksByStatus(status,id);
 		return tasks.stream()
                 .map(task -> new TaskDto(task.getId(), task.getDescrizione(),task.getDeadline(),task.getStatus(),task.getPm().getId())).collect(Collectors.toList());
 	}

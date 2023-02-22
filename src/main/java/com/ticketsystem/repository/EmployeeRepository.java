@@ -19,8 +19,8 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
 	@Modifying
 	@Transactional
-	@Query(value="INSERT INTO employee (nome, cognome, id_role,id_team) VALUES (:nome,:cognome,:roleId,:teamId)",nativeQuery = true)
-	void create(@Param("nome") String nome, @Param("cognome") String cognome, @Param("roleId") Long roleId,@Param("teamId")Long teamId);
+	@Query(value="INSERT INTO employee (nome, cognome, id_role,id_team,referent_id) VALUES (:nome,:cognome,:roleId,:teamId,:refId)",nativeQuery = true)
+	void create(@Param("nome") String nome, @Param("cognome") String cognome, @Param("roleId") Long roleId,@Param("teamId")Long teamId,@Param("refId")Long refId);
 
 	@Query(value="SELECT * FROM employee WHERE id_role = 1",nativeQuery = true)
 	List<Employee> findAllByRolePm();

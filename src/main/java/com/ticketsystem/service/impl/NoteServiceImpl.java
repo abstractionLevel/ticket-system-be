@@ -1,5 +1,8 @@
 package com.ticketsystem.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +31,26 @@ public class NoteServiceImpl implements NoteService{
 		Task task =  taskService.getById(taskId);
 		Employee employee =  employeeService.findById(noteDto.getDeveloperId());
 		if(task!=null && employee!=null) {
-			Note note = new Note(noteDto.getDescription(),task,employee);
+			Note note = new Note(noteDto.getDescrizione(),task,employee);
 			noteRepository.save(note);
 		}
 		else {
 		}
+	}
+
+	@Override
+	public List<NoteDto> getNotesByTaskId(Long taskId) {
+		List<Object[]> results =   noteRepository.getNoteByTaskId(taskId);
+		List<NoteDto> noteDtos = new ArrayList<>();
+		for (Object[] result : results) {
+            String descrizione = (String) result[0];
+            String nome = (String) result[1];
+            String cognome = (String) result[2];
+            NoteDto noteDto = new NoteDto(descrizione, nome, cognome);
+            noteDtos.add(noteDto);
+        }
+
+        return noteDtos;
 	}
 
 }

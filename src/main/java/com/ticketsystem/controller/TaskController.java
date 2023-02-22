@@ -1,4 +1,4 @@
-package com.ticketsystem.controller;
+	package com.ticketsystem.controller;
 
 import java.util.List;
 
@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ticketsystem.TaskDto;
 import com.ticketsystem.dto.NoteDto;
 import com.ticketsystem.dto.TaskAssignmentDto;
+import com.ticketsystem.entity.ProjectAssignment;
 import com.ticketsystem.service.NoteService;
+import com.ticketsystem.service.ProjectAssignmentService;
 import com.ticketsystem.service.TaskService;
 
 @RestController
@@ -31,12 +33,14 @@ public class TaskController {
 	private TaskService taskService;
 	@Autowired
 	private NoteService noteService;
+	@Autowired
+	private ProjectAssignmentService projectAssignmentTaskService;
 	
 
-	@GetMapping("{status}")
-	public ResponseEntity<List<TaskDto>> getTasksByStatus(@PathVariable String status ) {
+	@GetMapping("{status}/projects/{id}")
+	public ResponseEntity<List<TaskDto>> getTasksByStatus(@PathVariable String status,@PathVariable Long id ) {
 		try {
-			List<TaskDto> taskDtos = taskService.getTasksByStatus(status);
+			List<TaskDto> taskDtos = taskService.getTasksByStatus(status,id);
 			return new ResponseEntity<>(taskDtos,HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -57,6 +61,7 @@ public class TaskController {
 	public ResponseEntity<?> deleteAssignedTask(@PathVariable Long taskId  , @PathVariable Long id) {
 		try {
 			taskService.deleteAssignedTask(id);
+			projectAssignmentTaskService.delete(id, taskId);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -75,7 +80,7 @@ public class TaskController {
 	
 
 	
-	@PostMapping("{taskId}/note")
+	@PostMapping("{taskId}/notes")
 	public ResponseEntity<?> createNote(@PathVariable Long taskId,@RequestBody NoteDto noteDto) {
 		try {
 			noteService.create(noteDto, taskId);
@@ -85,6 +90,16 @@ public class TaskController {
 		}
 	}
 	
+	@GetMapping("{taskId}/notes")
+	public ResponseEntity<List<NoteDto>> getAllNotes(@PathVariable Long taskId) {
+		try {
+			
+			List<NoteDto> noteDto =  noteService.getNotesByTaskId(taskId);
+			return new ResponseEntity<>(noteDto,HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 	
 }

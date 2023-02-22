@@ -7,6 +7,8 @@ public class EmployeeDto {
 	private Long roleId;
 	private Long id;
 	private Long teamId;
+	private String teamName;
+	private Long referentId;
 	
 	public EmployeeDto() {}
 	
@@ -17,6 +19,25 @@ public class EmployeeDto {
 		this.roleId = roleId;
 		this.id = id;
 		this.teamId = teamId;
+	}
+	
+	public EmployeeDto(String nome, String cognome, Long roleId, Long id,Long teamId,Long referentId) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.roleId = roleId;
+		this.id = id;
+		this.teamId = teamId;
+		this.referentId = referentId;
+	}
+	
+	public EmployeeDto(String nome, String cognome, Long roleId, Long id,String teamName) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.roleId = roleId;
+		this.id = id;
+		this.teamName = teamName;
 	}
 	
 	public EmployeeDto(String nome, String cognome, Long roleId, Long id) {
@@ -58,6 +79,22 @@ public class EmployeeDto {
 
 	public void setTeamId(Long teamId) {
 		this.teamId = teamId;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
+	public Long getReferentId() {
+		return referentId;
+	}
+
+	public void setReferentId(Long referentId) {
+		this.referentId = referentId;
 	}
 
 }
